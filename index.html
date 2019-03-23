@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>QA Challenge Accepted 5.0</title>
+      <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+      <meta name="author" content="Hakim El Hattab">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <link rel="stylesheet" href="css/reveal.css">
+      <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+      <!-- Theme used for syntax highlighting of code -->
+      <link rel="stylesheet" href="lib/css/zenburn.css">
+      <style>
+         /* Split the screen in half */
+         .split {
+         height: 100%;
+         width: 50%;
+         position: fixed;
+         z-index: 1;
+         top: 0;
+         overflow-x: hidden;
+         padding-top: 20px;
+         }
+         /* Control the left side */
+         .left {
+         left: 0;
+         }
+         /* Control the right side */
+         .right {
+         right: 0;
+         }
+         /* If you want the content centered horizontally and vertically */
+         .centered {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         text-align: center;
+         }
+         }
+         .nobrdrimg {border:0}
+      </style>
+      <!-- Printing and PDF exports -->
+      <script>
+         var link = document.createElement( 'link' );
+         link.rel = 'stylesheet';
+         link.type = 'text/css';
+         link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+         document.getElementsByTagName( 'head' )[0].appendChild( link );
+      </script>
+      <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <img style="position: absolute; top: 0; right: 0; border: 0; width: 240px; height: 80px; margin-right: 25px; margin-top:25px;" src="./images/qaca-logo.png" alt="QA Challenge Accepted logo">
+      <div class="reveal">
+         <!-- Any section element inside of this container is displayed as a slide -->
+         <div class="slides">
+            <section>
+               <h1>Supercharge</h1>
+               <h3>Your Regression Testing</h3>
+               <p>
+                  <small>by <a href="mailto:evgenikostadinov@gmail.com">Evgeni Kostadinov</a> </small>
+               </p>
+            </section>
+            <section>
+               <section id="fragments">
+                  <h2>Table of contents</h2>
+                  <ol>
+                     <li>
+                        <p class="fragment grow">Our Speaker Today</p>
+                     </li>
+                     <li>
+                        <p class="fragment grow">Context And Prerequisites</p>
+                     </li>
+                     <li>
+                        <p class="fragment grow">The Regression Testing Problem</p>
+                     </li>
+                     <li>
+                        <p class="fragment grow">Agile-ish Toolbox Solution</p>
+                     </li>
+                     <li>
+                        <p class="fragment grow">Future Work</p>
+                     </li>
+                     <li>
+                        <p class="fragment grow">Q&amp;A</p>
+                     </li>
+                  </ol>
+               </section>
+            </section>
+            <section style="text-align: left;">
+               <div class="split left">
+                  <div class="centered">
+                  </div>
+               </div>
+               <div class="split right">
+                  <div class="centered">
+                     <p>Perpetual beta learner</p>
+                     <p>QA Manager with groundwork experience</p>
+                     <p>Test architect who enjoys the craft</p>
+                  </div>
+               </div>
+               <h2>Who am I</h2>
+               <img class="nobrdrimg" src="./images/qaca2.jpg" width=550 height=450 style="border:0 !important;"/>               
+            </section>
+            <section>
+               <h2>Quick poll</h2>
+               <p>How many of you, are performing Regression testing on:</p>
+               <p class="fragment fade-up">every deploy?</p>
+               <p class="fragment fade-up">every release candidate?</p>
+               <p class="fragment fade-up">unclear business decisions?</p>
+            </section>
+            <section>
+               <section>
+                  <h2>Context Awareness</h2>
+                  <p>What is imperative to <b>understand</b> in our environment:</p>
+                  <p class="fragment fade-up">Scripted tests are only <b>half</b> of the Testing story</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/half_story.png" alt="half Story" style="border:0 !important;">
+               </section>
+               <section>
+                  <p><b>White box</b> testing is not scary</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/white_box.png" alt="White box" style="border:0 !important;">
+                  <p class="fragment fade-up">... or hard!</p>
+               </section>
+               <section>
+                  <p><b>Version Control</b> Systems are powerful</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/vcs.png" alt="GIT" style="border:0 !important;">
+                  <p class="fragment fade-up">... and vital tool!</p>
+               </section>
+            </section>
+            <section>
+               <section>
+                  <h2>Regression testing is painful</h2>
+                  <p class="fragment fade-up">But <b>essential</b>, because software changes constantly</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/change.png" alt="half Story" style="border:0 !important;">
+               </section>
+               <section>
+                  <p>Team Structure Impacts Regression Testing</p>
+                  <img class="nobrdrimg" width="278" height="238" data-src="./images/team_roles.png" alt="Team roles" style="border:0 !important;">
+                  <p class="fragment fade-up">Agile requires that the whole team should take <b>responsibility</b> for regression testing</p>
+                  <p class="fragment fade-up"> ... and not only testers!</p>
+               </section>
+               <section>
+                  <p><b>Releases</b> increment the functionality</p>
+                  <p> The development <b>time</b> does not necessarily <b>grow</b> with releases,</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/grow.png" alt="Grow" style="border:0 !important;">
+                  <p class="fragment fade-up">... but the testing time does!</p>
+               </section>
+               <section>
+                  <p>Within the same <b>budget</b></p>
+                  <p>No company will invest more time in testing and less for development</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/scalable.png" alt="Scalable" style="border:0 !important;">
+                  <p class="fragment fade-up">... we need <b>scalable</b> solution!</p>
+               </section>
+            </section>
+            <section>
+               <section>
+                  <h2>Solution Stack Overview</h2>
+                  <p class="fragment fade-up">RCRCRC mnemonic</p>
+                  <p class="fragment fade-up">Code indexer, search and navigation tool  - <a href="https://github.com/eapache/starscope">Starscope</a></p>
+                  <p class="fragment fade-up">Git VCS</p>
+                  <img class="nobrdrimg" width="178" height="238" data-src="./images/overview.png" alt="Solution overview" style="border:0 !important;">
+               </section>
+               <section>
+                  <p>Regression testing is <b>change</b>-focused</p>
+                  <p class="fragment fade-up">How much <b>effort</b> is required, ultimately depends upon the <b>scope</b>.</p>
+                  <p class="fragment fade-up">Which can be effectively decided when the tester gets <b>input</b> from the business and dev team about the</p>
+                  <p class="fragment fade-up"><b>Amount</b></p>
+                  <p class="fragment fade-up"><b>Scope</b></p>
+                  <p class="fragment fade-up">and <b>Nature</b> of change!</p>
+               </section>
+               <section>
+                  <p> Amount of change</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+# here be dragons
+# diff between two tags                           
+cd ./to/git/repo                                          
+git checkout {main-branch} # (e.g. master)
+git fetch --all                                            
+git tag --list                                              
+git diff {tag1} {tag2} --stat
+git diff {tag1} {tag2} -- some-file-name
+git diff --name-only {tag1} {tag2}
+   		  </code></pre>
+               </section>
+               <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #1</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 --stat
+# files omitted for readability
+angular.json                                                               |   140 +
+package-lock.json                                                          | 20390 ++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------
+package.json                                                               |   249 +-
+src/api/config.ts                                                          |    32 +-
+src/api/db/migrations.ts                                                   |     7 +-
+src/api/db/repository.ts                                                   |   107 +-
+src/api/deploy/aws-code-deploy.ts                                          |    50 +-
+src/api/deploy/aws-elastic.ts                                              |    50 +-
+src/api/deploy/aws-s3.ts                                                   |   220 +-
+src/api/env-variables.ts                                                   |     4 +-
+src/api/security.ts                                                        |    17 +-
+src/api/server-routes.ts                                                   |   253 +-
+# files omitted for readability
+
+   		  </code></pre>
+               </section>
+               <section>
+               <p> Scope of change</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+# can be found via tools that can peek changed functions’ references in the code                           
+gem install starscope # install the code indexer tool 
+tsc src/**/*.ts --outDir js/ # compile Typescript to JS  
+starscope js/ # create local DB                                   
+starscope -q calls,{function-name-all-references}
+starscope -q require,{function-name} | grep -F 'file/location'
+   		  </code></pre>
+               </section>
+               <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #2</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+# file level
+user@~/Desktop/abstruse (master): tsc src/**/*.ts --outDir js/
+user@~/Desktop/abstruse (master): starscope js/
+user@~/Desktop/abstruse (master): starscope -q requires,process-manager
+./process-manager -- js/api/socket.js:11 (var process_manager_1 = require("./process-manager");)
+./process-manager -- js/api/webhooks.js:7 (var process_manager_1 = require("./process-manager");)
+./process-manager -- js/api/server-routes.js:27 (var process_manager_1 = require("./process-manager");)
+./process-manager -- js/api/docker-stats.js:7 (var process_manager_1 = require("./process-manager");)
+
+# method_level
+# src/api/process-manager.ts:export function restartJob(jobId: number)
+user@~/Desktop/abstruse (master): starscope -q calls,restartJob
+restartJob -- js/api/socket.js:210 (process_manager_1.restartJob(parseInt(event.data.jobId, 10)))
+   		  </code></pre>
+               </section>
+
+               <section>
+               <p> <b>Nature</b> of change</p> 
+               <p>Can be best found in direct <b>communication</b> with the dev team.</p>
+               <p class="fragment fade-up">It is a <b>composite index</b> of Coupling (Scope of change) and Type Rank.</p>
+               <p class="fragment fade-up">Usually the following types of <b>files</b> are with high level of feature dependencies:</p>
+               
+                   <ul>
+                     <li> <p class="fragment fade-up"><b>Config</b>urations e.g. dependencies, environment variables</p></li>
+                     <li> <p class="fragment fade-up"><b>Wrappers</b> e.g. Decorators, Proxy, Bridge, Facade,  Adapter</p></li>
+                     <li> <p class="fragment fade-up"><b>Base</b> classes</p></li>
+                     <li> <p class="fragment fade-up"><b>Abstractions</b> e.g. in Typescript look for keywords like abstract, extends</p></li>
+                </ul>               
+               </section>
+               <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #3</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 --stat
+...
+src/app/components/app-header/app-header.component.ts                      |     7 +-
+...
+
+user@~/Desktop/abstruse (master): grep -rnw 'js/' -e 'decorator'
+...
+js//src/app/components/app-header/app-header.component.js:11:var __param = (this && this.__param) || function (paramIndex, decorator) {
+...
+   		  </code></pre>
+               </section>
+            </section>
+            <section>
+               <section>
+                  <h2>RCRCRC</h2>
+                  <p>Regression Testing <b>Heuristic</b> by <a href="http://www.karennjohnson.com/"> Karen N. Johnson</a></p>
+                  <p class="fragment fade-up">Recent</p>
+                  <p class="fragment fade-up">Core</p>
+                  <p class="fragment fade-up">Risk</p>
+                  <p class="fragment fade-up">Configuration</p>
+                  <p class="fragment fade-up">Repaired</p>
+                  <p class="fragment fade-up">Chronic</p>
+               </section>
+               <section>
+               <p>Recent and Repaired</p>
+               <p class="fragment fade-up"><b>New features</b>, new areas of code are more vulnerable.</p>
+               <p class="fragment fade-up">Bug <b>fixes</b> can introduce new issues.</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+# diff between two tags                           
+cd ./to/git/repo                                          
+git checkout {main-branch} # (e.g. master)
+git fetch --all
+git log -{number-of-commits-back} --oneline
+git diff {SHA1} {SHA2} --stat 
+git diff {SHA1} {SHA2} -- some-file-name
+git diff --name-only {SHA1} {SHA2}   
+   		  </code></pre>
+               </section>
+
+               <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #4</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 -- src/api/security.ts
+...
+-import * as crypto from 'crypto';
+...
+-import { RSA } from 'rsa-compat';
++import { RSA } from 'rsa-compat-ssl';
+...
++import * as bcrypt from 'bcrypt';
+ 
+ export function generatePassword(plain: string): 
+-  return new Promise((resolve, reject) => {
+-    resolve(calculateMd5(plain));
+-  });
++  return bcrypt.hash(plain, 12);
+ }
+   		  </code></pre>
+               </section>
+               <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #5</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+ export function comparePassword(plain: string, hash: string): Promise<boolean> {
+-  return generatePassword(plain)
+-    .then(calculated => hash === calculated);
++  return bcrypt.compare(plain, hash);
+ }
+ 
+ export function generateJwt(data: any): Promise<string> {
+   return new Promise((resolve, reject) => {
++    delete data.password;
++
+     jwt.sign(data, config.jwtSecret, {}, (err: jwt.JsonWebTokenError, token: string) => {
+       if (err) {
+         reject(err);
+@@ -42,10 +41,6 @@ export function decodeJwt(token: string): any {
+   }
+ }
+ 
+-export function calculateMd5(str: string): string {
+-  return crypto.createHash('md5').update(str).digest('hex');
+-}
+-
+ 		  </code></pre>
+               </section>
+               <section>
+               <p>Configuration sensitive</p>
+               <p>Code that’s dependent on <b>environment settings</b> can be vulnerable.</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+for i in $(find . -name '*config*')
+do 
+     git diff {tag1} {tag2} --stat $i
+done  
+   		  </code></pre>
+               </section>
+               <section> 
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #6</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+user@~/Desktop/abstruse (master): ll
+# files omitted for readability
+total 1384
+-rw-r--r--   1 evgenikostadinov  staff   458B Apr  2 13:47 .abstruse.yml
+-rw-r--r--   1 evgenikostadinov  staff   2.2K Apr  2 13:47 Dockerfile
+-rw-r--r--   1 evgenikostadinov  staff   3.7K Apr  2 13:47 angular.json
+-rw-r--r--   1 evgenikostadinov  staff   877B Apr  2 13:47 karma.conf.js
+-rw-r--r--   1 evgenikostadinov  staff   510K Apr  2 13:47 package-lock.json
+-rw-r--r--   1 evgenikostadinov  staff   4.1K Apr  2 13:47 package.json
+-rw-r--r--   1 evgenikostadinov  staff   536B Apr  2 13:47 protractor.conf.js
+-rw-r--r--   1 evgenikostadinov  staff   363B Apr  2 13:47 tsconfig.json
+-rw-r--r--   1 evgenikostadinov  staff   1.2K Apr  2 13:47 webpack.api.js
+   		  </code></pre>
+               </section>
+              <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #7</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+user@~/Desktop/abstruse (master): for i in $(find . -name '*config*');do git diff v1.5.0 v1.6.6 --stat $i; done
+ .editorconfig | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ tsconfig.json | 32 ++++++++++++++------------------
+ 1 file changed, 14 insertions(+), 18 deletions(-)
+ e2e/tsconfig.e2e.json | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ src/tsconfig.api.json | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ src/app/services/config.service.ts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ src/tsconfig.app.json | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ src/api/config.ts | 32 ++++++++++++++++++++++----------
+ 1 file changed, 22 insertions(+), 10 deletions(-)
+ src/tsconfig.spec.json | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+   		  </code></pre>
+               </section>
+               <section>
+               <p>Chronic</p>
+               <p><b>Hottest files</b> via log crunching (would be great to compare with Defect density heatmap).</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+git log --name-status $*|  grep -E '^[A-Z]\s+'|  cut -c3-500|  sort|  uniq -c|  grep -vE '^ {6}1 '| sort -n|  tail  
+   		  </code></pre>
+               </section>
+              <section>
+                  <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #8</p>
+                  <pre><code class="hljs" data-trim contenteditable>
+user@~/Desktop/abstruse (master): git log --name-status $* | grep -E '^[A-Z]\s+' | cut -c3-500 | sort | uniq -c | grep -vE '^ {6}1 ' | sort -n | tail
+# files omitted for readability
+ 71 src/api/socket.ts
+ 84 src/api/server-routes.ts
+ 90 src/api/process.ts
+ 137 src/api/process-manager.ts
+   		  </code></pre>
+               </section>            
+            </section>
+            <section>
+                  <h2>Future Work</h2>
+                  <p class="">Regression <a href="https://github.com/eapache/starscope">Test Selection Techniques</a> for Test-Driven Development</p>
+                  <p class="fragment fade-up">Automated Regression Test Suite <a href="http://uksim.info/icaiet2014/CD/data/7910a048.pdf">Optimization </a>based on Heuristics</p>
+                  <p class="fragment fade-up">Git <a href="https://experiments.github.com/semantic-code-search">Semantic Code Search</a><br/>
+                     <img class="nobrdrimg" width="700" height="238" data-src="./images/hubot_codesearch.gif" alt="Solution overview" style="border:0 !important;">
+                  </p>
+               </section>
+            <section>
+               <h3>Careful consideration and Practicing selectiveness are the Key</h3>
+               <img class="nobrdrimg" src="./images/key.png" width=200 height=200 style="border:0 !important;"/>
+               </section>
+            <section style="text-align: left;">
+               <div class="split left">
+                  <div class="centered">
+                  </div>
+               </div>
+               <div class="split right">
+                  <div class="centered">
+                     <p> Evgeni Kostadinov </p>
+                     <img class="nobrdrimg" src="./images/gmail_logo.png" width=50 height=50 style="border:0 !important;"/>                   
+                     <p>evgenikostadinov@gmail.com</p>
+                     <p><img class="nobrdrimg" src="./images/linkedIn_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>  /in/ekostadinov</p>
+                     <p><img class="nobrdrimg" src="./images/github_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>/ekostadinov</p>
+                  </div>
+               </div>
+               <h1>Thank You!</h1>
+               <img class="nobrdrimg" src="./images/thankyou.png" width=550 height=450 style="border:0 !important;"/>
+            </section>
+            <section style="text-align: left;">
+               <div class="split left">
+                  <div class="centered">
+                  </div>
+               </div>
+               <div class="split right">
+                  <div class="centered">
+                     <p> Evgeni Kostadinov </p>
+                     <img class="nobrdrimg" src="./images/gmail_logo.png" width=50 height=50 style="border:0 !important;"/>                   
+                     <p>evgenikostadinov@gmail.com</p>
+                     <p><img class="nobrdrimg" src="./images/linkedIn_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>  /in/ekostadinov</p>
+                     <p><img class="nobrdrimg" src="./images/github_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>/ekostadinov</p>
+                  </div>
+               </div>
+               <h2>Any <img class="nobrdrimg" src="./images/qna.png" width=100 height=100 style="border:0 !important; margin-bottom:-5px;"/>stions?</h2>
+               <img class="nobrdrimg" src="./images/anyq.png" width=550 height=450 style="border:0 !important;"/>
+            </section>
+            <section data-transition="slide" data-background="#ffffff" data-background-transition="zoom">
+               <img src="./images/last_slide.png" style="border:0 !important;"/>
+            </section>
+          </div>
+      </div>
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+      <script>
+         // More info https://github.com/hakimel/reveal.js#configuration
+         Reveal.initialize({
+         	controls: true,
+         	progress: true,
+         	history: true,
+         	center: true,
+         
+                      // Responsive slides
+                      width: "100%",
+                      height: "100%",
+                      margin: 0,
+                      minScale: 1,
+                      maxScale: 1,
+         
+         	transition: 'convex', // none/fade/slide/convex/concave/zoom
+         
+         	// More info https://github.com/hakimel/reveal.js#dependencies
+         	dependencies: [
+         		{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+         		{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         		{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         		{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+         		{ src: 'plugin/search/search.js', async: true },
+         		{ src: 'plugin/zoom-js/zoom.js', async: true },
+         		{ src: 'plugin/notes/notes.js', async: true }
+         	]
+         });
+         
+      </script>
+   </body>
+</html>
