@@ -5,3 +5,8 @@ Toolbox solution to help with Exploratory regression testing, when it needs to b
 Within the same budget, no company will invest more time in testing and less for development. The development time does not necessarily grow with releases ... but the testing time does!
 
 View slides [here](https://ekostadinov.github.io/regression-testing-stack).
+
+High level overview of the approach:
+
+![stack diagram](./images/stack.png)
+
