@@ -7,7 +7,6 @@
       <meta name="author" content="Hakim El Hattab">
       <meta name="apple-mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <link rel="stylesheet" href="css/reveal.css">
       <link rel="stylesheet" href="css/theme/beige.css" id="theme">
       <!-- Theme used for syntax highlighting of code -->
@@ -104,7 +103,7 @@
                   </div>
                </div>
                <h2>Who am I</h2>
-               <img class="nobrdrimg" src="./images/qaca2.jpg" width=550 height=450 style="border:0 !important;"/>               
+               <img class="nobrdrimg" src="./images/qaca2.jpg" width=550 height=450 style="border:0 !important;"/>
             </section>
             <section>
                <h2>Quick poll</h2>
@@ -176,11 +175,11 @@
                   <p> Amount of change</p>
                   <pre><code class="hljs" data-trim contenteditable>
 # here be dragons
-# diff between two tags                           
-cd ./to/git/repo                                          
+# diff between two tags
+cd ./to/git/repo
 git checkout {main-branch} # (e.g. master)
-git fetch --all                                            
-git tag --list                                              
+git fetch --all
+git tag --list
 git diff {tag1} {tag2} --stat
 git diff {tag1} {tag2} -- some-file-name
 git diff --name-only {tag1} {tag2}
@@ -210,10 +209,10 @@ src/api/server-routes.ts                                                   |   2
                <section>
                <p> Scope of change</p>
                   <pre><code class="hljs" data-trim contenteditable>
-# can be found via tools that can peek changed functions’ references in the code                           
-gem install starscope # install the code indexer tool 
-tsc src/**/*.ts --outDir js/ # compile Typescript to JS  
-starscope js/ # create local DB                                   
+# can be found via tools that can peek changed functions’ references in the code
+gem install starscope # install the code indexer tool
+tsc src/**/*.ts --outDir js/ # compile Typescript to JS
+starscope js/ # create local DB
 starscope -q calls,{function-name-all-references}
 starscope -q require,{function-name} | grep -F 'file/location'
    		  </code></pre>
@@ -238,17 +237,17 @@ restartJob -- js/api/socket.js:210 (process_manager_1.restartJob(parseInt(event.
                </section>
 
                <section>
-               <p> <b>Nature</b> of change</p> 
+               <p> <b>Nature</b> of change</p>
                <p>Can be best found in direct <b>communication</b> with the dev team.</p>
                <p class="fragment fade-up">It is a <b>composite index</b> of Coupling (Scope of change) and Type Rank.</p>
                <p class="fragment fade-up">Usually the following types of <b>files</b> are with high level of feature dependencies:</p>
-               
+
                    <ul>
                      <li> <p class="fragment fade-up"><b>Config</b>urations e.g. dependencies, environment variables</p></li>
                      <li> <p class="fragment fade-up"><b>Wrappers</b> e.g. Decorators, Proxy, Bridge, Facade,  Adapter</p></li>
                      <li> <p class="fragment fade-up"><b>Base</b> classes</p></li>
                      <li> <p class="fragment fade-up"><b>Abstractions</b> e.g. in Typescript look for keywords like abstract, extends</p></li>
-                </ul>               
+                </ul>
                </section>
                <section>
                   <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #3</p>
@@ -281,14 +280,14 @@ js//src/app/components/app-header/app-header.component.js:11:var __param = (this
                <p class="fragment fade-up"><b>New features</b>, new areas of code are more vulnerable.</p>
                <p class="fragment fade-up">Bug <b>fixes</b> can introduce new issues.</p>
                   <pre><code class="hljs" data-trim contenteditable>
-# diff between two tags                           
-cd ./to/git/repo                                          
+# diff between two tags
+cd ./to/git/repo
 git checkout {main-branch} # (e.g. master)
 git fetch --all
 git log -{number-of-commits-back} --oneline
-git diff {SHA1} {SHA2} --stat 
+git diff {SHA1} {SHA2} --stat
 git diff {SHA1} {SHA2} -- some-file-name
-git diff --name-only {SHA1} {SHA2}   
+git diff --name-only {SHA1} {SHA2}
    		  </code></pre>
                </section>
 
@@ -303,8 +302,8 @@ user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 -- src/api/security.ts
 +import { RSA } from 'rsa-compat-ssl';
 ...
 +import * as bcrypt from 'bcrypt';
- 
- export function generatePassword(plain: string): 
+
+ export function generatePassword(plain: string):
 -  return new Promise((resolve, reject) => {
 -    resolve(calculateMd5(plain));
 -  });
@@ -320,7 +319,7 @@ user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 -- src/api/security.ts
 -    .then(calculated => hash === calculated);
 +  return bcrypt.compare(plain, hash);
  }
- 
+
  export function generateJwt(data: any): Promise<string> {
    return new Promise((resolve, reject) => {
 +    delete data.password;
@@ -331,7 +330,7 @@ user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 -- src/api/security.ts
 @@ -42,10 +41,6 @@ export function decodeJwt(token: string): any {
    }
  }
- 
+
 -export function calculateMd5(str: string): string {
 -  return crypto.createHash('md5').update(str).digest('hex');
 -}
@@ -343,12 +342,12 @@ user@~/Desktop/abstruse (master): git diff v1.5.0 v1.6.6 -- src/api/security.ts
                <p>Code that’s dependent on <b>environment settings</b> can be vulnerable.</p>
                   <pre><code class="hljs" data-trim contenteditable>
 for i in $(find . -name '*config*')
-do 
+do
      git diff {tag1} {tag2} --stat $i
-done  
+done
    		  </code></pre>
                </section>
-               <section> 
+               <section>
                   <p><a href="https://github.com/bleenco/abstruse"> Abstruse CI platform</a> example #6</p>
                   <pre><code class="hljs" data-trim contenteditable>
 user@~/Desktop/abstruse (master): ll
@@ -391,7 +390,7 @@ user@~/Desktop/abstruse (master): for i in $(find . -name '*config*');do git dif
                <p>Chronic</p>
                <p><b>Hottest files</b> via log crunching (would be great to compare with Defect density heatmap).</p>
                   <pre><code class="hljs" data-trim contenteditable>
-git log --name-status $*|  grep -E '^[A-Z]\s+'|  cut -c3-500|  sort|  uniq -c|  grep -vE '^ {6}1 '| sort -n|  tail  
+git log --name-status $*|  grep -E '^[A-Z]\s+'|  cut -c3-500|  sort|  uniq -c|  grep -vE '^ {6}1 '| sort -n|  tail
    		  </code></pre>
                </section>
               <section>
@@ -404,7 +403,7 @@ user@~/Desktop/abstruse (master): git log --name-status $* | grep -E '^[A-Z]\s+'
  90 src/api/process.ts
  137 src/api/process-manager.ts
    		  </code></pre>
-               </section>            
+               </section>
             </section>
             <section>
                   <h2>Future Work</h2>
@@ -426,7 +425,7 @@ user@~/Desktop/abstruse (master): git log --name-status $* | grep -E '^[A-Z]\s+'
                <div class="split right">
                   <div class="centered">
                      <p> Evgeni Kostadinov </p>
-                     <img class="nobrdrimg" src="./images/gmail_logo.png" width=50 height=50 style="border:0 !important;"/>                   
+                     <img class="nobrdrimg" src="./images/gmail_logo.png" width=50 height=50 style="border:0 !important;"/>
                      <p>evgenikostadinov@gmail.com</p>
                      <p><img class="nobrdrimg" src="./images/linkedIn_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>  /in/ekostadinov</p>
                      <p><img class="nobrdrimg" src="./images/github_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>/ekostadinov</p>
@@ -443,7 +442,7 @@ user@~/Desktop/abstruse (master): git log --name-status $* | grep -E '^[A-Z]\s+'
                <div class="split right">
                   <div class="centered">
                      <p> Evgeni Kostadinov </p>
-                     <img class="nobrdrimg" src="./images/gmail_logo.png" width=50 height=50 style="border:0 !important;"/>                   
+                     <img class="nobrdrimg" src="./images/gmail_logo.png" width=50 height=50 style="border:0 !important;"/>
                      <p>evgenikostadinov@gmail.com</p>
                      <p><img class="nobrdrimg" src="./images/linkedIn_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>  /in/ekostadinov</p>
                      <p><img class="nobrdrimg" src="./images/github_logo.png" width=50 height=50 style="border:0 !important; margin-bottom:-5px;"/>/ekostadinov</p>
@@ -466,16 +465,16 @@ user@~/Desktop/abstruse (master): git log --name-status $* | grep -E '^[A-Z]\s+'
          	progress: true,
          	history: true,
          	center: true,
-         
+
                       // Responsive slides
                       width: "100%",
                       height: "100%",
                       margin: 0,
                       minScale: 1,
                       maxScale: 1,
-         
+
          	transition: 'convex', // none/fade/slide/convex/concave/zoom
-         
+
          	// More info https://github.com/hakimel/reveal.js#dependencies
          	dependencies: [
          		{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -487,7 +486,7 @@ user@~/Desktop/abstruse (master): git log --name-status $* | grep -E '^[A-Z]\s+'
          		{ src: 'plugin/notes/notes.js', async: true }
          	]
          });
-         
+
       </script>
    </body>
 </html>
