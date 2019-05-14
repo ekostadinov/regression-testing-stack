@@ -214,7 +214,7 @@ gem install starscope # install the code indexer tool
 tsc src/**/*.ts --outDir js/ # compile Typescript to JS
 starscope js/ # create local DB
 starscope -q calls,{function-name-all-references}
-starscope -q require,{function-name} | grep -F 'file/location'
+starscope -q requires,{function-name} | grep -F 'file/location'
    		  </code></pre>
                </section>
                <section>
